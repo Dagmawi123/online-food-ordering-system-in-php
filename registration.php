@@ -159,7 +159,7 @@ if(isset($_POST['submit'] )) //if submit btn is pressed
 								  <div class="form-group col-sm-12">
                                        <label for="exampleInputEmail1">User-Name</label>
                                        <input class="form-control" type="text" name="username" id="example-text-input" placeholder="UserName"> 
-                                    </div>
+                                       </div>
                                     <div class="form-group col-sm-6">
                                        <label for="exampleInputEmail1">First Name</label>
                                        <input class="form-control" type="text" name="firstname" id="example-text-input" placeholder="First Name"> 
