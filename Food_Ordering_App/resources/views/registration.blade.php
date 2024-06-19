@@ -344,22 +344,22 @@ if(isset($_POST['submit'] )) //if submit btn is pressed
                            <div class="col-xs-12 col-sm-3 payment-options color-gray">
                               <h5>Payment Options</h5>
                               <ul>
-                                 <li>
-                                    <a href="#"> <img src="images/paypal.png" alt="Paypal"> </a>
-                                 </li>
-                                 <li>
-                                    <a href="#"> <img src="images/mastercard.png" alt="Mastercard"> </a>
-                                 </li>
-                                 <li>
-                                    <a href="#"> <img src="images/maestro.png" alt="Maestro"> </a>
-                                 </li>
-                                 <li>
-                                    <a href="#"> <img src="images/stripe.png" alt="Stripe"> </a>
-                                 </li>
-                                 <li>
-                                    <a href="#"> <img src="images/bitcoin.png" alt="Bitcoin"> </a>
-                                 </li>
-                              </ul>
+                                <li>
+                                    <a href="#"> <img src="{{asset('images/paypal.png')}}" alt="Paypal"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src="{{asset('images/mastercard.png')}}" alt="Mastercard"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src="{{asset('images/maestro.png')}}" alt="Maestro"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src="{{asset('images/stripe.png')}}" alt="Stripe"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src=" {{asset('images/bitcoin.png')}}" alt="Bitcoin"> </a>
+                                </li>
+                            </ul>
                            </div>
                            <div class="col-xs-12 col-sm-4 address color-gray">
                               <h5>Address</h5>

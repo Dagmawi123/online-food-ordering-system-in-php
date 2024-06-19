@@ -34,8 +34,8 @@
         <!-- header header  -->
         <div class="header">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
-               <!-- Logo -->
-               <div class="navbar-header">
+                 <!-- Logo -->
+                 <div class="navbar-header">
                     <a class="navbar-brand" href="/adminstrator">
                         <!-- Logo icon -->
                         <b><img src="{{asset('images/adminImages/logo.png')}}" alt="homepage" class="dark-logo" /></b>
@@ -119,7 +119,9 @@
                         </li>
                         <!-- Comment -->
                         <li class="nav-item dropdown">
-                           
+                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
+								<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+							</a>
                             <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
                                 <ul>
                                     <li>
@@ -166,7 +168,7 @@
                         <!-- End Comment -->
                         <!-- Messages -->
                         <li class="nav-item dropdown">
-                           
+                            <a class="nav-link dropdown-toggle text-muted  " href="#" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-envelope"></i>
 								<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
 							</a>
                             <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn" aria-labelledby="2">
@@ -213,8 +215,8 @@
                             </div>
                         </li>
                         <!-- End Messages -->
-                        <!-- Profile -->
-                     <li class="nav-item dropdown">
+                       <!-- Profile -->
+                       <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('images/adminImages/users/5.jpg')}} " alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
@@ -231,8 +233,8 @@
         <div class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
+                   <!-- Sidebar navigation-->
+                   <nav class="sidebar-nav">
                 <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
@@ -253,7 +255,7 @@
                         </li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-archive f-s-20 color-warning"></i><span class="hide-menu">Store</span></a>
                             <ul aria-expanded="false" class="collapse">
-							<li><a href="/restaurants/all">All Restaurants</a></li>
+                            <li><a href="/restaurants/all">All Restaurants</a></li>
 								<li><a href="/categories/add">Add Category</a></li>
                                 <li><a href="/restaurants/add">Add Restaurant</a></li>
                                 
@@ -298,59 +300,114 @@
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
-                     
-					
-					
-					  <div class="row">
-                   
-                   
-					
-					 <div class="container-fluid">
-                <!-- Start Page Content -->
-                  
-                @if($errors->has('CategoryName') ) 
-                 <div class="alert alert-danger alert-dismissible fade show">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            
-            @error('CategoryName')
-                <strong>{{ $message }}</strong><br>
-                 </div>
-        @enderror				
-			@endif	
+                       									<!-- ERROR Display area -->
+@if($errors->has('title') || $errors->has('slogan') || $errors->has('price') || $errors->has('image'))
+    <div class="alert alert-danger alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        @error('title')
+            <strong>{{ $message }}</strong><br>
+        @enderror
+        @error('slogan')
+            <strong>{{ $message }}</strong><br>
+        @enderror
+        @error('price')
+            <strong>{{ $message }}</strong><br>
+        @enderror
+        @error('image')
+            <strong>{{ $message }}</strong><br>
+        @enderror
+    </div>
+@endif
 									
 								
 								
 					    <div class="col-lg-12">
                         <div class="card card-outline-primary">
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white">Update Restaurant Category</h4>
+                                <h4 class="m-b-0 text-white">Update Dish</h4>
                             </div>
                             <div class="card-body">
-                                <form action='/categories/update/{{$cat->id}}' method='post' >
-                                    @csrf
-                                    <div class="form-body">
-                                        
-                                        <hr>
+                                <form action='/foods/update/{{$food->id}}' method='post'  enctype="multipart/form-data">
+                                @csrf    
+                                <div class="form-body">
+                                               <hr>
                                         <div class="row p-t-20">
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="control-label">Category</label>
-                                                    <input type="text" name="CategoryName" value="{{$cat->CategoryName}}" class="form-control" placeholder="Category Name">
+                                                    <label class="control-label">Dish Name</label>
+                                                    <input type="text" name="title" value="{{$food->title}}" class="form-control" placeholder="Morzirella">
                                                    </div>
                                             </div>
                                             <!--/span-->
+                                            <div class="col-md-6">
+                                                <div class="form-group has-danger">
+                                                    <label class="control-label">About</label>
+                                                    <input type="text" name="slogan" value="{{$food->slogan}}" class="form-control form-control-danger" placeholder="slogan">
+                                                    </div>
+                                            </div>
+                                            <!--/span-->
+                                        </div>
+                                        <!--/row-->
+                                        <div class="row p-t-20">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">price </label>
+                                                    <input type="text" name="price" value="{{$food->price}}"  class="form-control" placeholder="$">
+                                                   </div>
+                                            </div>
+                                            <!--/span-->
+                                            <div class="col-md-6">
+                                                <div class="form-group has-danger">
+                                                    <label class="control-label">Image</label>
+                                                    <input type="file" name="image"  id="lastName" class="form-control form-control-danger" placeholder="12n">
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <!--/row-->
+										
+                                            <!--/span-->
+                                        <div class="row">
                                             
+											
+											
+											
+											
+											
+											
+											 <div class="col-md-12">
+                                                <div class="form-group">
+                                                     <label class="control-label">Select Restaurant</label>
+													<select name="Rest_id" class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
+                                                        <option selected hidden value="{{$food->restaurant->id}}">{{$food->restaurant->title}}</option>
+                                                        <!-- iterate through each Category -->
+                                                         @foreach ($restaurants as $cat)
+                                                          <option value="{{$cat->id}}">{{$cat->title}}</option>
+                                                         @endforeach
+                                                
+													 </select>
+
+
+                                                </div>
+                                            </div>
+											
+											
+											
+                                        </div>
+                                     
+                                        </div>
                                     </div>
                                     <div class="form-actions">
                                         <input type="submit" name="submit" class="btn btn-success" value="save"> 
-                                        <a href="/categories/add" class="btn btn-inverse">Back</a>
+                                        <a href="/foods" class="btn btn-inverse">Cancel</a>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
 					
-                </div>
+					
+					
+					
 					
 					
 					
@@ -365,13 +422,13 @@
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> © 2024 All rights reserved. </footer>
+        
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->
     </div>
     <!-- End Wrapper -->
-    <!-- All Jquery -->
+  <!-- All Jquery -->
     <script src="{{asset('js/adminJs/lib/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{asset('js/adminJs/lib/bootstrap/js/popper.min.js')}} "></script>

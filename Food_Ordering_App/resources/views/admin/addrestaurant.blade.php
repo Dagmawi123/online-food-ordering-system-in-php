@@ -23,6 +23,7 @@
 <![endif]-->
 </head>
 
+
 <body class="fix-header">
     <!-- Preloader - style you can find in spinners.css -->
     <div class="preloader">
@@ -32,10 +33,10 @@
     <!-- Main wrapper  -->
     <div id="main-wrapper">
         <!-- header header  -->
-         <div class="header">
+       <div class="header">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
-                <!-- Logo -->
-                <div class="navbar-header">
+               <!-- Logo -->
+               <div class="navbar-header">
                     <a class="navbar-brand" href="/adminstrator">
                         <!-- Logo icon -->
                         <b><img src="{{asset('images/adminImages/logo.png')}}" alt="homepage" class="dark-logo" /></b>
@@ -97,14 +98,14 @@
         <div class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
+         <!-- Sidebar navigation-->
+         <nav class="sidebar-nav">
                 <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/adminstrator/">Dashboard</a></li>
+                                <li><a href="/adminstrator">Dashboard</a></li>
                                 
                             </ul>
                         </li>
@@ -119,7 +120,7 @@
                         </li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-archive f-s-20 color-warning"></i><span class="hide-menu">Store</span></a>
                             <ul aria-expanded="false" class="collapse">
-								<li><a href="/restaurants/all">All Restaurants</a></li>
+                            <li><a href="/restaurants/all">All Restaurants</a></li>
 								<li><a href="/categories/add">Add Category</a></li>
                                 <li><a href="/restaurants/add">Add Restaurant</a></li>
                                 
@@ -135,7 +136,7 @@
                         </li>
 						 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
                             <ul aria-expanded="false" class="collapse">
-								<li><a href="/orders">All Orders</a></li>
+							<li><a href="/orders/all">All Orders</a></li>
 								  
                             </ul>
                         </li>
@@ -159,121 +160,166 @@
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
-                     <div class="row">
-                   
-            
-					 <div class="container-fluid">
-                <!-- Start Page Content -->
-                  
-				@if($errors->has('uname') || $errors->has('fname') || $errors->has('lname') || $errors->has('email') || $errors->has('phone'))
+                @if($errors->has('title') || $errors->has('phone') || $errors->has('website') || $errors->has('email') || $errors->has('image'))
     <div class="alert alert-danger alert-dismissible fade show">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-        @error('uname')
-            <strong>{{ $message }}</strong><br>
-        @enderror
-        @error('fname')
-            <strong>{{ $message }}</strong><br>
-        @enderror
-        @error('lname')
-            <strong>{{ $message }}</strong><br>
-        @enderror
-        @error('email')
+        @error('title')
             <strong>{{ $message }}</strong><br>
         @enderror
         @error('phone')
             <strong>{{ $message }}</strong><br>
         @enderror
+        @error('website')
+            <strong>{{ $message }}</strong><br>
+        @enderror
+        @error('email')
+            <strong>{{ $message }}</strong><br>
+        @enderror
+        @error('image')
+            <strong>{{ $message }}</strong><br>
+        @enderror
     </div>
-@endif		
-
-
+@endif
+									
+								
 								
 					    <div class="col-lg-12">
                         <div class="card card-outline-primary">
                             <div class="card-header">
-                                <h4 class="m-b-0 text-white">Add Users</h4>
+                                <h4 class="m-b-0 text-white">Add Restaurant</h4>
                             </div>
                             <div class="card-body">
-                                <form action='/user/adminregister' method='post'  enctype="multipart/form-data">
+                                <form action='/restaurants/add' method='post'  enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-body">
-                                       
-                                        <hr>
-                                        <div class="row p-t-20">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Username</label>
-                                                    <input type="text" name="uname"  value="{{old('uname')}}"  class="form-control" placeholder="username">
-                                                   </div>
-                                            </div>
-                                            <!--/span-->
-                                            <div class="col-md-6">
-                                                <div class="form-group has-danger">
-                                                    <label class="control-label">First-Name</label>
-                                                    <input type="text" name="fname"  value="{{old('fname')}}"  class="form-control form-control-danger" placeholder="jon">
-                                                    </div>
-                                            </div>
-                                            <!--/span-->
-                                        </div>
-                                        <!--/row-->
-                                        <div class="row p-t-20">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Last-Name </label>
-                                                    <input type="text" name="lname"  value="{{old('lname')}}"  class="form-control" placeholder="doe">
-                                                   </div>
-                                            </div>
-                                            <!--/span-->
-                                            <div class="col-md-6">
-                                                <div class="form-group has-danger">
-                                                    <label class="control-label">Email</label>
-                                                    <input type="text" name="email"  value="{{old('email')}}"  class="form-control form-control-danger" placeholder="example@gmail.com">
-                                                    </div>
-                                            </div>
-                                            <!--/span-->
-                                        </div>
-                                        <!--/row-->
-										 <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Password</label>
-                                                    <input type="text" name="password"  value="{{old('password')}}"  class="form-control form-control-danger" placeholder="password">
-                                                    </div>
-                                                </div>
-                                        
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Phone</label>
-                                                    <input type="text" name="phone"  value="{{old('phone')}}"   class="form-control form-control-danger" placeholder="phone">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--/span-->
-                                            <h3 class="box-title m-t-40"> Address</h3>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-12 ">
-                                                <div class="form-group">
-                                                    
-                                                    <textarea name="address" type="text" style="height:100px;" class="form-control">
-                                                    {{old('title')}}
-                                                    </textarea>
-                                                </div>
-                                            </div>
-                                        </div>
                                       
-                                      
-                                            <!--/span-->
-                                        </div>
-                                    </div>
-                                    <div class="form-actions">
-                                        <input type="submit" name="submit" class="btn btn-success" value="save"> 
-                                        <a href="dashboard.php" class="btn btn-inverse">Cancel</a>
-                                    </div>
+                                      <hr>
+                                      <div class="row p-t-20">
+                                          <div class="col-md-6">
+                                              <div class="form-group">
+                                                  <label class="control-label">Restaurant Name</label>
+                                                  <input type="text" name="title"  value="{{old('title')}}"   class="form-control" placeholder="John doe">
+                                                 </div>
+                                          </div>
+                                          <!--/span-->
+                                          <div class="col-md-6">
+                                              <div class="form-group has-danger">
+                                                  <label class="control-label">Bussiness E-mail</label>
+                                                  <input type="text" name="email"  value="{{old('email')}}"  class="form-control form-control-danger" placeholder="example@gmail.com">
+                                                  </div>
+                                          </div>
+                                          <!--/span-->
+                                      </div>
+                                      <!--/row-->
+                                      <div class="row p-t-20">
+                                          <div class="col-md-6">
+                                              <div class="form-group">
+                                                  <label class="control-label">Phone </label>
+                                                  <input type="text" name="phone"  value="{{old('phone')}}"  class="form-control" placeholder="0935502020">
+                                                 </div>
+                                          </div>
+                                          <!--/span-->
+                                          <div class="col-md-6">
+                                              <div class="form-group has-danger">
+                                                  <label class="control-label">website URL</label>
+                                                  <input type="text" name="website"  value="{{old('website')}}"  class="form-control form-control-danger" placeholder="http://example.com">
+                                                  </div>
+                                          </div>
+                                          <!--/span-->
+                                      </div>
+                                      <!--/row-->
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <div class="form-group">
+                                                  <label class="control-label">Opening Hours</label>
+                                                  <select name="o_hr" class="form-control custom-select"  data-placeholder="Choose a Category" >
+                                                      <option value="6am">6am</option>
+                                                      <option value="7am">7am</option> 
+                                                      <option value="8am">8am</option>
+                                                      <option value="9am">9am</option>
+                                                      <option value="10am">10am</option>
+                                                      <option value="11am">11am</option>
+                                                  </select>
+                                              </div>
+                                          </div>
+                                          <!--/span-->
+                                           <div class="col-md-6">
+                                              <div class="form-group">
+                                                  <label class="control-label">Closing Hours</label>
+                                                  <select name="c_hr" class="form-control custom-select"    data-placeholder="Choose a Category" >
+                                                      <option value="4pm">4pm</option> 
+                                                      <option value="5pm">5pm</option>
+                                                      <option value="6pm">6pm</option>
+                                                      <option value="7pm">7pm</option>
+                                                      <option value="8pm">8pm</option>
+                                                  </select>
+                                              </div>
+                                          </div>
+                                          
+                                           <div class="col-md-6">
+                                              <div class="form-group">
+                                                  <label class="control-label">Open Days</label>
+                                                  <select name="o_days" class="form-control custom-select"  data-placeholder="Choose a Category" tabindex="1">
+                                                      <option value="mon-tue">mon-tue</option>
+                                                      <option value="mon-wed">mon-wed</option> 
+                                                      <option value="mon-thu">mon-thu</option>
+                                                      <option value="mon-fri">mon-fri</option>
+                                                      <option value="mon-sat">mon-sat</option>
+                                                      <option value="24hr-x7">24hr/7</option>
+                                                  </select>
+                                              </div>
+                                          </div>
+                                          
+                                          
+                                          <div class="col-md-6">
+                                              <div class="form-group has-danger">
+                                                  <label class="control-label">Image</label>
+                                                  <input type="file" name="image"  id="lastName"  class="form-control form-control-danger" placeholder="12n">
+                                                  </div>
+                                          </div>
+                                          <!--/span-->
+                                          
+                                           <div class="col-md-12">
+                                              <div class="form-group">
+                                                  <label class="control-label">Select Category</label>
+                                                  <select name="Cat_Id" class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
+                                                      <!-- iterate through each Category -->
+                                                       @foreach ($categories as $cat)
+                                                        <option value="{{$cat->id}}">{{$cat->CategoryName}}</option>
+                                                       @endforeach
+                                              
+                                                   </select>
+                                              </div>
+                                          </div>
+                                          
+                                          
+                                          
+                                          
+                                      </div>
+                                      <!--/row-->
+                                      <h3 class="box-title m-t-40">Address</h3>
+                                      <hr>
+                                      <div class="row">
+                                          <div class="col-md-12 ">
+                                              <div class="form-group">
+                                                  
+                                                  <textarea name="address" type="text" style="height:100px;" class="form-control" >{{old('address')}}</textarea>
+                                              </div>
+                                          </div>
+                                      </div>
+                                    
+                                          <!--/span-->
+                                      </div>
+                                  </div>
+                                  <div class="form-actions">
+                                      <input type="submit" name="submit" class="btn btn-success" value="save"> 
+                                      <a href="/restaurants/all" class="btn btn-inverse">Cancel</a>
+                                  </div>
                                 </form>
                             </div>
                         </div>
                     </div>
+					
 					
 					
 					
@@ -291,14 +337,14 @@
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> © 2018 All rights reserved. </footer>
+        
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->
     </div>
     <!-- End Wrapper -->
-     <!-- All Jquery -->
-     <script src="{{asset('js/adminJs/lib/jquery/jquery.min.js')}}"></script>
+   <!-- All Jquery -->
+   <script src="{{asset('js/adminJs/lib/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{asset('js/adminJs/lib/bootstrap/js/popper.min.js')}} "></script>
     <script src="{{asset('js/adminJs/lib/bootstrap/js/bootstrap.min.js')}} "></script>
@@ -310,7 +356,6 @@
     <script src="{{asset('js/adminJs/lib/sticky-kit-master/dist/sticky-kit.min.js')}} "></script>
     <!--Custom JavaScript -->
     <script src="{{asset('js/adminJs/custom.min.js')}}"></script>
-
 </body>
 
 </html>

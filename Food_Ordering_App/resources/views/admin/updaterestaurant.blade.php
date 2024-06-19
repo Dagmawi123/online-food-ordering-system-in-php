@@ -36,7 +36,7 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <!-- Logo -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="/adminstrator">
                         <!-- Logo icon -->
                         <b><img src="{{asset('images/adminImages/logo.png')}}" alt="homepage" class="dark-logo" /></b>
                         <!--End Logo icon -->
@@ -220,7 +220,7 @@
                             <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('images/adminImages/users/5.jpg')}} " alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
-                                    <li><a href="logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="/adminstrator/logout"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -240,7 +240,7 @@
                         <li class="nav-label">Home</li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="dashboard.php">Dashboard</a></li>
+                                <li><a href="/adminstrator">Dashboard</a></li>
                                 
                             </ul>
                         </li>
@@ -424,7 +424,7 @@
                                                 <div class="form-group">
                                                     <label class="control-label">Select Category</label>
 													<select name="Cat_Id" class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
-                                                        <option value="{{$restaurant->category->id}}">{{$restaurant->category->CategoryName}}</option>
+                                                        <option selected hidden value="{{$restaurant->category->id}}">{{$restaurant->category->CategoryName}}</option>
                                                         <!-- iterate through each Category -->
                                                          @foreach ($categories as $cat)
                                                           <option value="{{$cat->id}}">{{$cat->CategoryName}}</option>

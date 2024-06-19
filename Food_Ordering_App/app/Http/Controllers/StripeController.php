@@ -41,9 +41,5 @@ class StripeController extends Controller
         // dd($session); 
         return redirect()->away($session->url);
     }
- 
-//     public function success()
-//     {
-//         return "Thanks for you order You have just completed your payment. The seeler will reach out to you as soon as possible";
-//     }
+
 }

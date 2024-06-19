@@ -29,13 +29,20 @@ class AdminController extends Controller
         
         if(Auth::guard('admin')->attempt($formData)){
         $request->session()->regenerate();
-        return redirect('/');
+        return redirect('/adminstrator');
         }
         return back()->withErrors([
-            'login' => 'The provided credentials do not match our records.',
+            'username' => 'The provided credentials do not match our records.',
         ])->onlyInput('login');
         
         }
+
+function logout(){
+    Auth::guard('admin')->logout();
+    return redirect('/');   
+}
+
+
 
         function store(Request $request){
             // AdminCode $code=null;

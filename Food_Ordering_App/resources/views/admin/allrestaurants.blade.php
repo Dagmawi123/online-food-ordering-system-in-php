@@ -22,8 +22,7 @@
     <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-
-<body class="fix-header">
+<body class="fix-header fix-sidebar">
     <!-- Preloader - style you can find in spinners.css -->
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
@@ -34,9 +33,9 @@
         <!-- header header  -->
          <div class="header">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
-                <!-- Logo -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
+              <!-- Logo -->
+              <div class="navbar-header">
+                    <a class="navbar-brand" href="/adminstrator">
                         <!-- Logo icon -->
                         <b><img src="{{asset('images/adminImages/logo.png')}}" alt="homepage" class="dark-logo" /></b>
                         <!--End Logo icon -->
@@ -79,12 +78,12 @@
                         </li>
                         <!-- End Comment -->
                       
-                          <!-- Profile -->
+                      <!-- Profile -->
                      <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('images/adminImages/users/5.jpg')}} " alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
-                                    <li><a href="logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    <li><a href="/adminstrator/logout"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -104,7 +103,7 @@
                         <li class="nav-label">Home</li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="dashboard.php">Dashboard</a></li>
+                                <li><a href="/adminstrator">Dashboard</a></li>
                                 
                             </ul>
                         </li>
@@ -148,7 +147,7 @@
         </div>
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
-        <div class="page-wrapper" style="height:1200px;">
+        <div class="page-wrapper">
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
@@ -157,11 +156,16 @@
             </div>
             <!-- End Bread crumb -->
             <!-- Container fluid  -->
-             <div class="container-fluid">
+            <div class="container-fluid">
                 <!-- Start Page Content -->
                 <div class="row">
                     <div class="col-12">
-              
+                        
+                       
+                      
+                       
+						
+						
 						     <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">All stores data</h4>
@@ -171,16 +175,16 @@
                                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-											 <th>Cat.</th>
-                                                <th>Restaurant-Name</th>
+											 <th>Cat</th>
+                                                <th>Store-Name</th>
                                                 <th>Email</th>
                                                 <th>Phone</th>
-                                                <th>Site</th>
+                                                <th>Url</th>
                                                 <th>Open Hrs</th>
                                                 <th>Close Hrs</th>
 												<th>Open Days</th>
 												  <th>Address</th>
-												  <th>Image</th>
+												  <th>Store-Image</th>
 												  <th>Date</th>
 												   <th>Action</th>
 												  
@@ -188,23 +192,24 @@
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                            <th>Cat.</th>
-                                                <th>Restaurant-Name</th>
+											 <th>Cat</th>
+                                                <th>Store-Name</th>
                                                 <th>Email</th>
                                                 <th>Phone</th>
-                                                <th>Site</th>
+                                                <th>Url</th>
+												
                                                 <th>Open Hrs</th>
                                                 <th>Close Hrs</th>
 												<th>Open Days</th>
 												  <th>Address</th>
-												  <th>Image</th>
+												  <th>Store-Image</th>
 												  <th>Date</th>
 												   <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-										
-                        @if(count($restaurants)==0)                
+
+                                        @if(count($restaurants)==0)                
                                         <!--No restaurant td  -->
                        <td colspan="11"><center>No Restaurant Data!</center></td> 
 
@@ -237,11 +242,7 @@
         @endforeach
        @endif															 
 				
-                                 
-                                                        
-                                                            
-                                                           
-                                        </tbody>
+    </tbody>
                                     </table>
                                 </div>
                             </div>

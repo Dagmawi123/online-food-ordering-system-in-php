@@ -19,7 +19,7 @@ class OrderController extends Controller
         ->select('FoodId', DB::raw('COUNT(*) as order_count'))
         ->groupBy('FoodId')
         ->orderBy('order_count', 'desc')
-        ->take(1)
+        ->take(3)
         ->get();
          
         foreach($topDishes as $dish){
@@ -80,7 +80,7 @@ return back();
 }
 
 function cancel(Order $order){
-$order->status='Canceled';
+$order->status='Cancelled';
 $order->save();
 return redirect()->route('orders');
 }
@@ -104,6 +104,27 @@ function add(){
     return redirect()->route('index');
 }
 
+function all(){
+ $orders=Order::all();
+ return view('admin.allorders',['orders'=>$orders]);
+}
 
+function remove(Order $order){
+$order->delete();
+return redirect()->route('allOrders');
+}
+
+function view(Order $order){
+    // $order=Order::find(2);
+    // dd($order);
+    return view('admin.vieworder',['order'=>$order]);
+}
+
+function dispatch(Order $order){
+    $order->status='Delivered';
+    $order->save();
+    return redirect()->route('allOrders');
+    }
+    
 }
 

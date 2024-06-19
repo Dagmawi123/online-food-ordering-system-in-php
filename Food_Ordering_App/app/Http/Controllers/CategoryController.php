@@ -25,10 +25,14 @@ class CategoryController extends Controller
      return redirect()->route('categories');
     }
 
+function edit(Category $cat){
+return view('admin.updatecategory',['cat'=>$cat]);
+}
+
     function update(Category $cat,Request $request){
         // dd($request);
         $formFields = $request->validate([
-            'CategoryName'=>['min:5',Rule::unique('categories','CategoryName')->ignore($cat->CategoryName)]
+            'CategoryName'=>['min:5',Rule::unique('categories','CategoryName')->ignore($cat->id)]
                 ]);
         //   dd($request);
         $cat->update($formFields);

@@ -267,13 +267,13 @@ only screen and (max-width: 760px),
             <button type="button" class="btn btn-warning">  <span class="fa fa-cog fa-spin" aria-hidden="true"></span> On ur Way!</button>
   @elseif($order->Status == "Delivered")  
          <button type="button" class="btn btn-success"><span class="fa fa-check-circle" aria-hidden="true"></span> Delivered</button>
-@elseif($order->Status == "Canceled")
+@elseif($order->Status == "Cancelled")
     <button type="button" class="btn btn-danger"><i class="fa fa-close"></i> Cancelled </button>
 @endif
 
                </td>
                             <td data-column="Date">{{$order->Date}} </td>
-                            <td data-column="Action"> <a href="{{$order->Status != "Canceled"?'orders/cancel/'.$order->id :''}}" onclick="return confirm('Are you sure you want to cancel your order?');" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
+                            <td data-column="Action"> <a href="{{$order->Status != "Cancelled"?'orders/cancel/'.$order->id :''}}" onclick="return confirm('Are you sure you want to cancel your order?');" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
                             </td>
                             
 												</tr>
@@ -389,22 +389,22 @@ only screen and (max-width: 760px),
                                 <div class="col-xs-12 col-sm-3 payment-options color-gray">
                                     <h5>Payment Options</h5>
                                     <ul>
-                                        <li>
-                                            <a href="#"> <img src="images/paypal.png" alt="Paypal"> </a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> <img src="images/mastercard.png" alt="Mastercard"> </a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> <img src="images/maestro.png" alt="Maestro"> </a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> <img src="images/stripe.png" alt="Stripe"> </a>
-                                        </li>
-                                        <li>
-                                            <a href="#"> <img src="images/bitcoin.png" alt="Bitcoin"> </a>
-                                        </li>
-                                    </ul>
+                                <li>
+                                    <a href="#"> <img src="{{asset('images/paypal.png')}}" alt="Paypal"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src="{{asset('images/mastercard.png')}}" alt="Mastercard"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src="{{asset('images/maestro.png')}}" alt="Maestro"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src="{{asset('images/stripe.png')}}" alt="Stripe"> </a>
+                                </li>
+                                <li>
+                                    <a href="#"> <img src=" {{asset('images/bitcoin.png')}}" alt="Bitcoin"> </a>
+                                </li>
+                            </ul>
                                 </div>
                                 <div class="col-xs-12 col-sm-4 address color-gray">
                                     <h5>Address</h5>

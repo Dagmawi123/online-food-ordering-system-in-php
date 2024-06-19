@@ -3,116 +3,208 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
-//get the main page
-Route::get('/', [OrderController::class,'index'])->name('index');
-// Route::get('/', function(){return view('restaurants');});
-
-//get details for a popular dish 
-Route::get('/orders/dish/{food}',[OrderController::class,'popularDish']);
-
-//get the restaurant detail 
-Route::get('/orders/rest/{rest}',[OrderController::class,'exploreRestaurant']);
-
-//render checkout page
-Route::get('/orders/checkout',[OrderController::class,'checkout'])->name('checkout')->middleware('auth');
+Route::middleware('auth')->group(function (){
+    Route::group(['controller'=>OrderController::class,'prefix'=>'/orders'],function (){
+//render checkout page 
+Route::get('/checkout','checkout')->name('checkout');
 //get all orders
-Route::get('/orders',[OrderController::class,'orders'])->middleware('auth')->name('orders');
+Route::get('','orders')->name('orders');
 //cancelling an order
-Route::get('/orders/cancel/{order}',[OrderController::class,'cancel']);
+Route::get('/cancel/{order}','cancel');
 //render add order page
-Route::get('/orders/add',[OrderController::class,'add'])->name('addOrder');
+Route::get('/add','add')->name('addOrder');
+     
+    });
 
+
+    Route::group(['controller'=>CartController::class,'prefix'=>'/cart'],function (){
 //add item to the cart
-Route::post('/cart/add',[CartController::class,'add'])->middleware('auth');
+Route::post('/add','add');
 //delete item from the cart
-Route::get('/cart/delete/{food}',[CartController::class,'remove'])->middleware('auth');
+Route::get('/delete/{food}','remove');
+    });
 
-//render register user page
-Route::get('/user/register',[UserController::class,'register']);
-//save user 
-Route::post('/user/register',[UserController::class,'store']);
+//log a user out
+Route::get('/user/logout',[UserController::class,'logout']);
+// Route::get('/checkout', [StripeController::class,'checkout'])->name('checkout');
+
+Route::group(['controller'=>StripeController::class],function (){
+//making paymement
+Route::post('/session', 'session')->name('session');
+//render checkout page 
+Route::get('/success', 'success')->name('success');
+});
+
+});
+
+/*
+return all orders
+Route::get('/orders',')
+*/
+
+
+
+Route::middleware('admin')->group(function (){
+    Route::group(['controller'=>UserController::class],function(){
 
 //save user by admin
-Route::post('/user/adminregister',[UserController::class,'adminStore']);
-
-//render login page 
-Route::get('/user/signIn',[UserController::class,'sign'])->name('login');
-//authenticate user
-Route::post('/user/signIn',[UserController::class,'authenticate']);
-//log a user out
-Route::get('/user/logout',[UserController::class,'logout'])->middleware('auth');
+Route::post('/user/adminregister','adminStore');
 
 //get all users
-Route::get('/users',[UserController::class,'allUsers'])->name('users');
+Route::get('/users','allUsers')->name('users');
 
 //remove user
-Route::get('/users/remove/{user}',[UserController::class,'remove']);
+Route::get('/users/remove/{user}','remove');
 
 //get update user page
-Route::get('/users/update/{user}',[UserController::class,'edit']);
+Route::get('/users/update/{user}','edit');
 
 //update a user
-Route::post('/users/update/{user}',[UserController::class,'update']);
+Route::post('/users/update/{user}','update');
 
 //render add user page
-Route::get('/users/add',[UserController::class,'add']);
+Route::get('/users/add','add');
+
+});
+
+Route::group(['controller'=>RestaurantController::class,'prefix'=>'/restaurants'],function(){
+
+//get all restaurants for admin
+Route::get('/all','all')->name('restaurants');
+
+//remove user
+Route::get('/remove/{rest}','remove');
+
+//render update restaurant page
+Route::get('/update/{rest}','edit');
+
+//update restaurant functionality
+Route::post('/update/{rest}','update');
+
+
+//render add restaurant page
+Route::get('/add','add');
+
+// add restaurant 
+Route::post('/add','store');
+
+});
+
+Route::group(['controller'=>AdminController::class,'prefix'=>'/adminstrator'],function(){
+//admin dashboard
+Route::get('/','dashboard')->middleware('admin');
+
+//logout an admin
+Route::get('/logout','logout');    
+});
+
+
+Route::group(['controller'=>CategoryController::class,'prefix'=>'/categories'],function(){
+//get add category page 
+Route::get('/add','index')->name('categories');
+
+//add category
+Route::post('/add','add');
+
+//get update category page
+Route::get('/update/{cat}','edit');
+//update category
+Route::post('/update/{cat}','update');
+
+//remove a category
+Route::get('/remove/{cat}','remove');
+});
+
+Route::group(['controller'=>FoodController::class,'prefix'=>'/foods'],function(){
+//render all foods page
+Route::get('/','index')->name('foods');
+
+//get update food page
+Route::get('/update/{food}','edit');
+
+// update food 
+Route::post('/update/{food}','update');
+
+
+//delete a food
+Route::get('/remove/{food}','remove');
+
+//render add food page
+Route::get('/add','add');
+// add food 
+Route::post('/add','store');
+
+});
+Route::group(['controller'=>OrderController::class,'prefix'=>'/orders'],function(){
+//get all orders page
+Route::get('/all','all')->name('allOrders');   
+//remove an order
+Route::get('/remove/{order}','remove');
+
+//view an order
+Route::get('/{order}','view');
+
+//dispatch an order
+Route::get('/dispatch/{order}','dispatch');
+});
+
+
+});
 
 
 
 
+//The  following routes don't need any form of authentication whether it's admin or normal user
+
+
+// Route::get('/', function(){return view('restaurants');});
+//get the main page
+Route::get('/', [OrderController::class,'index'])->name('index');
+
+Route::group(['controller'=>OrderController::class,'prefix'=>'/orders'],function (){
+
+
+//get details for a popular dish 
+Route::get('/dish/{food}','popularDish');
+
+//get the restaurant detail 
+Route::get('/rest/{rest}','exploreRestaurant');
+});
+
+Route::group(['controller'=>UserController::class,'prefix'=>'/user'],function(){
+
+//render register user page
+Route::get('/register','register');
+//save user 
+Route::post('/register','store');
+//render login page 
+Route::get('/signIn','sign')->name('login');
+
+//authenticate user
+Route::post('/signIn','authenticate');
+
+});
 
 //get all restaurants
 Route::get('/restaurants',[RestaurantController::class,'restaurants']);
-//get all restaurants for admin
-Route::get('/restaurants/all',[RestaurantController::class,'all'])->name('restaurants');
 
-//remove user
-Route::get('/restaurants/remove/{rest}',[RestaurantController::class,'remove']);
-
-//render update restaurant page
-Route::get('/restaurants/update/{rest}',[RestaurantController::class,'edit']);
-
-//update restaurant functionality
-Route::post('/restaurants/update/{rest}',[RestaurantController::class,'update']);
-
-// Route::get('/checkout', [StripeController::class,'checkout'])->name('checkout');
-//making paymement
-Route::post('/session', [StripeController::class,'session'])->name('session')->middleware('auth');
-//render checkout page 
-Route::get('/success', [StripeController::class,'success'])->name('success')->middleware('auth');
-
-//Admin Related routes
-
-//admin dashboard
-Route::get('/adminstrator',[AdminController::class,'dashboard']);
-
+Route::group(['controller'=>AdminController::class,'prefix'=>'/adminstrator'],function (){
 
 //get the admin login page
-Route::get('/adminstrator/login',[AdminController::class,'index']);
+Route::get('/login','index')->name('adminlogin');
 //register admin
-Route::post('adminstrator/register',[AdminController::class,'store']);
+Route::post('/register','store');
 
 //authenticate admin
-Route::post('/adminstrator/authenticate',[AdminController::class,'authenticate']);
+Route::post('/authenticate','authenticate');
 
-//get add category page 
-Route::get('/categories/add',[CategoryController::class,'index'])->name('categories');
-
-//add category
-Route::post('/categories/add',[CategoryController::class,'add']);
-
-//update category
-Route::post('/categories/update/{cat}',[CategoryController::class,'update']);
-
-//remove a category
-Route::get('/categories/remove/{cat}',[CategoryController::class,'remove']);
-
+});
 

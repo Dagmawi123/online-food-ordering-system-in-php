@@ -23,7 +23,7 @@
 <![endif]-->
 </head>
 
-<body class="fix-header">
+<body class="fix-header fix-sidebar">
     <!-- Preloader - style you can find in spinners.css -->
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
@@ -34,8 +34,8 @@
         <!-- header header  -->
          <div class="header">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
-                <!-- Logo -->
-                <div class="navbar-header">
+              <!-- Logo -->
+            <div class="navbar-header">
                     <a class="navbar-brand" href="/adminstrator">
                         <!-- Logo icon -->
                         <b><img src="{{asset('images/adminImages/logo.png')}}" alt="homepage" class="dark-logo" /></b>
@@ -79,8 +79,8 @@
                         </li>
                         <!-- End Comment -->
                       
-                          <!-- Profile -->
-                     <li class="nav-item dropdown">
+                       <!-- Profile -->
+                       <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('images/adminImages/users/5.jpg')}} " alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
@@ -97,14 +97,14 @@
         <div class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
+              <!-- Sidebar navigation-->
+              <nav class="sidebar-nav">
                 <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="/adminstrator/">Dashboard</a></li>
+                                <li><a href="/adminstrator">Dashboard</a></li>
                                 
                             </ul>
                         </li>
@@ -119,7 +119,7 @@
                         </li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-archive f-s-20 color-warning"></i><span class="hide-menu">Store</span></a>
                             <ul aria-expanded="false" class="collapse">
-								<li><a href="/restaurants/all">All Restaurants</a></li>
+							<li><a href="/restaurants/all">All Restaurants</a></li>
 								<li><a href="/categories/add">Add Category</a></li>
                                 <li><a href="/restaurants/add">Add Restaurant</a></li>
                                 
@@ -148,7 +148,7 @@
         </div>
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
-        <div class="page-wrapper" style="height:1200px;">
+        <div class="page-wrapper">
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
@@ -159,146 +159,89 @@
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
-                     <div class="row">
-                   
-            
-					 <div class="container-fluid">
-                <!-- Start Page Content -->
-                  
-				@if($errors->has('uname') || $errors->has('fname') || $errors->has('lname') || $errors->has('email') || $errors->has('phone'))
-    <div class="alert alert-danger alert-dismissible fade show">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-        @error('uname')
-            <strong>{{ $message }}</strong><br>
-        @enderror
-        @error('fname')
-            <strong>{{ $message }}</strong><br>
-        @enderror
-        @error('lname')
-            <strong>{{ $message }}</strong><br>
-        @enderror
-        @error('email')
-            <strong>{{ $message }}</strong><br>
-        @enderror
-        @error('phone')
-            <strong>{{ $message }}</strong><br>
-        @enderror
-    </div>
-@endif		
-
-
-								
-					    <div class="col-lg-12">
-                        <div class="card card-outline-primary">
-                            <div class="card-header">
-                                <h4 class="m-b-0 text-white">Add Users</h4>
-                            </div>
+                <div class="row">
+                    <div class="col-12">
+                        
+                       
+                        <div class="card">
                             <div class="card-body">
-                                <form action='/user/adminregister' method='post'  enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="form-body">
-                                       
-                                        <hr>
-                                        <div class="row p-t-20">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Username</label>
-                                                    <input type="text" name="uname"  value="{{old('uname')}}"  class="form-control" placeholder="username">
-                                                   </div>
-                                            </div>
-                                            <!--/span-->
-                                            <div class="col-md-6">
-                                                <div class="form-group has-danger">
-                                                    <label class="control-label">First-Name</label>
-                                                    <input type="text" name="fname"  value="{{old('fname')}}"  class="form-control form-control-danger" placeholder="jon">
-                                                    </div>
-                                            </div>
-                                            <!--/span-->
-                                        </div>
-                                        <!--/row-->
-                                        <div class="row p-t-20">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Last-Name </label>
-                                                    <input type="text" name="lname"  value="{{old('lname')}}"  class="form-control" placeholder="doe">
-                                                   </div>
-                                            </div>
-                                            <!--/span-->
-                                            <div class="col-md-6">
-                                                <div class="form-group has-danger">
-                                                    <label class="control-label">Email</label>
-                                                    <input type="text" name="email"  value="{{old('email')}}"  class="form-control form-control-danger" placeholder="example@gmail.com">
-                                                    </div>
-                                            </div>
-                                            <!--/span-->
-                                        </div>
-                                        <!--/row-->
-										 <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Password</label>
-                                                    <input type="text" name="password"  value="{{old('password')}}"  class="form-control form-control-danger" placeholder="password">
-                                                    </div>
-                                                </div>
-                                        
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="control-label">Phone</label>
-                                                    <input type="text" name="phone"  value="{{old('phone')}}"   class="form-control form-control-danger" placeholder="phone">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--/span-->
-                                            <h3 class="box-title m-t-40"> Address</h3>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-12 ">
-                                                <div class="form-group">
+                                <h4 class="card-title">All user Orders</h4>
+                             
+                                <div class="table-responsive m-t-40">
+                                    <table id="myTable" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Username</th>		
+                                                <th>Title</th>
+                                                <th>Quantity</th>
+                                                <th>price</th>
+												<th>Address</th>
+												<th>status</th>												
+												 <th>Reg-Date</th>
+												  <th>Action</th>
+												 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           @if (count($orders)==0)
+                             			<td colspan="8"><center>No Orders-Data!</center></td> 
+                                        @else             
+                                      
+											<!-- No order data -->
+								
+@foreach($orders as $order)
+                                                    <tr>
+                                                    <td>{{$order->user->fname}}</td>
+                                                    <td>{{$order->food->title}}</td>
+                                                    <td>{{$order->Quantity}}</td>
+                                                    <td>{{$order->Price}}</td>
+                                                    <td>{{$order->user->address}}</td>
                                                     
-                                                    <textarea name="address" type="text" style="height:100px;" class="form-control">
-                                                    {{old('title')}}
-                                                    </textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                      
-                                      
-                                            <!--/span-->
-                                        </div>
-                                    </div>
-                                    <div class="form-actions">
-                                        <input type="submit" name="submit" class="btn btn-success" value="save"> 
-                                        <a href="dashboard.php" class="btn btn-inverse">Cancel</a>
-                                    </div>
-                                </form>
+    @if($order->Status == "On process")
+<td> <button type="button" class="btn btn-warning"><span class="fa fa-cog fa-spin"  aria-hidden="true" ></span>Dispatch!</button></td> 
+    @elseif($order->Status == "Delivered")  
+<td> <button type="button" class="btn btn-success" ><span  class="fa fa-check-circle" aria-hidden="true">Delivered</button></td> 
+
+    @elseif($order->Status == "Cancelled")
+<td> <button type="button" class="btn btn-danger"> <i class="fa fa-close"></i>Cancelled</button></td> 
+@endif
+	<td>{{$order->Date}}</td>
+ <td>
+        <a href="/orders/remove/{{$order->id}}" onclick="return confirm('Are you sure?');" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
+<a href="/orders/{{$order->id}}" class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="ti-settings"></i></a>
+</td>
+</tr>
+@endforeach
+@endif                                    
+                                            
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+						 </div>
+                      
                             </div>
                         </div>
                     </div>
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
                 </div>
                 <!-- End PAge Content -->
             </div>
             <!-- End Container fluid  -->
+			
+			
+			
+			
             <!-- footer -->
-            <footer class="footer"> © 2018 All rights reserved. </footer>
+            <footer class="footer"> © 2024 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a></footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->
     </div>
     <!-- End Wrapper -->
-     <!-- All Jquery -->
-     <script src="{{asset('js/adminJs/lib/jquery/jquery.min.js')}}"></script>
+    <!-- All Jquery -->
+    <script src="{{asset('js/adminJs/lib/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{asset('js/adminJs/lib/bootstrap/js/popper.min.js')}} "></script>
     <script src="{{asset('js/adminJs/lib/bootstrap/js/bootstrap.min.js')}} "></script>
@@ -311,6 +254,14 @@
     <!--Custom JavaScript -->
     <script src="{{asset('js/adminJs/custom.min.js')}}"></script>
 
-</body>
+    <script src="{{asset('js/adminJs/lib/datatables/datatables.min.js')}}"></script>
+    <script src="{{asset('js/adminJs/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('js/adminJs/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js')}}"></script>
+    <script src="{{asset('js/adminJs/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js')}}"></script>
+    <script src="{{asset('js/adminJs/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js')}}"></script>
+    <script src="{{asset('js/adminJs/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js')}}"></script>
+    <script src="{{asset('js/adminJs/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('js/adminJs/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js')}}"></script>
+    <script src="{{asset('js/adminJs/lib/datatables/datatables-init.js')}}"></script>
 
 </html>
