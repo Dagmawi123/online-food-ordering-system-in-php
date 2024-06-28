@@ -15,21 +15,15 @@ Route::middleware('auth')->group(function (){
     Route::group(['controller'=>OrderController::class,'prefix'=>'/orders'],function (){
 //render checkout page 
 Route::get('/checkout','checkout')->name('checkout');
-//get all orders
+
+//get all specific user orders
 Route::get('','orders')->name('orders');
+
 //cancelling an order
 Route::get('/cancel/{order}','cancel');
+
 //render add order page
 Route::get('/add','add')->name('addOrder');
-     
-    });
-
-
-    Route::group(['controller'=>CartController::class,'prefix'=>'/cart'],function (){
-//add item to the cart
-Route::post('/add','add');
-//delete item from the cart
-Route::get('/delete/{food}','remove');
     });
 
 //log a user out
@@ -37,8 +31,10 @@ Route::get('/user/logout',[UserController::class,'logout']);
 // Route::get('/checkout', [StripeController::class,'checkout'])->name('checkout');
 
 Route::group(['controller'=>StripeController::class],function (){
-//making paymement
+
+//making payment
 Route::post('/session', 'session')->name('session');
+
 //render checkout page 
 Route::get('/success', 'success')->name('success');
 });
@@ -68,7 +64,7 @@ Route::get('/users/remove/{user}','remove');
 Route::get('/users/update/{user}','edit');
 
 //update a user
-Route::post('/users/update/{user}','update');
+Route::put('/users/update/{user}','update');
 
 //render add user page
 Route::get('/users/add','add');
@@ -87,7 +83,7 @@ Route::get('/remove/{rest}','remove');
 Route::get('/update/{rest}','edit');
 
 //update restaurant functionality
-Route::post('/update/{rest}','update');
+Route::put('/update/{rest}','update');
 
 
 //render add restaurant page
@@ -99,8 +95,9 @@ Route::post('/add','store');
 });
 
 Route::group(['controller'=>AdminController::class,'prefix'=>'/adminstrator'],function(){
+
 //admin dashboard
-Route::get('/','dashboard')->middleware('admin');
+Route::get('/','dashboard');
 
 //logout an admin
 Route::get('/logout','logout');    
@@ -108,30 +105,35 @@ Route::get('/logout','logout');
 
 
 Route::group(['controller'=>CategoryController::class,'prefix'=>'/categories'],function(){
-//get add category page 
+
+    //get add category page 
 Route::get('/add','index')->name('categories');
+
 
 //add category
 Route::post('/add','add');
 
 //get update category page
 Route::get('/update/{cat}','edit');
+
 //update category
-Route::post('/update/{cat}','update');
+Route::put('/update/{cat}','update');
 
 //remove a category
 Route::get('/remove/{cat}','remove');
 });
 
 Route::group(['controller'=>FoodController::class,'prefix'=>'/foods'],function(){
-//render all foods page
+
+    //render all foods page
 Route::get('/','index')->name('foods');
 
-//get update food page
+
+    //get update food page
 Route::get('/update/{food}','edit');
 
-// update food 
-Route::post('/update/{food}','update');
+    // update food 
+Route::put('/update/{food}','update');
 
 
 //delete a food
@@ -162,29 +164,46 @@ Route::get('/dispatch/{order}','dispatch');
 
 
 
-//The  following routes don't need any form of authentication whether it's admin or normal user
 
+//Common Routes accessible by both guest and authenticated user
 
-// Route::get('/', function(){return view('restaurants');});
 //get the main page
 Route::get('/', [OrderController::class,'index'])->name('index');
 
 Route::group(['controller'=>OrderController::class,'prefix'=>'/orders'],function (){
 
-
-//get details for a popular dish 
+    //get details for a popular dish 
 Route::get('/dish/{food}','popularDish');
 
 //get the restaurant detail 
 Route::get('/rest/{rest}','exploreRestaurant');
 });
 
+//get all restaurants
+Route::get('/restaurants',[RestaurantController::class,'restaurants']);
+
+
+Route::group(['controller'=>CartController::class,'prefix'=>'/cart'],function (){
+    //add item to the cart
+    Route::post('/add','add');
+   
+    //delete item from the cart
+    Route::get('/delete/{food}','remove');
+        });
+
+
+
+
+//The  following routes don't need any form of authentication / u need to be a guest
+Route::middleware(['guest','checkAdmin'])->group(function(){
 Route::group(['controller'=>UserController::class,'prefix'=>'/user'],function(){
 
 //render register user page
 Route::get('/register','register');
+
 //save user 
 Route::post('/register','store');
+
 //render login page 
 Route::get('/signIn','sign')->name('login');
 
@@ -192,19 +211,19 @@ Route::get('/signIn','sign')->name('login');
 Route::post('/signIn','authenticate');
 
 });
-
-//get all restaurants
-Route::get('/restaurants',[RestaurantController::class,'restaurants']);
-
 Route::group(['controller'=>AdminController::class,'prefix'=>'/adminstrator'],function (){
 
-//get the admin login page
-Route::get('/login','index')->name('adminlogin');
-//register admin
-Route::post('/register','store');
+    //get the admin login page
+    Route::get('/login','index')->name('adminlogin');
 
-//authenticate admin
-Route::post('/authenticate','authenticate');
+    //register admin
+    Route::post('/register','store');
+    
+    //authenticate admin
+    Route::post('/authenticate','authenticate');    
+    });
+});  
 
-});
+
+    
 

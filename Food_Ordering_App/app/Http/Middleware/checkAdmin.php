@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class checkAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,10 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::guard('admin')->check())
+        //if an admin is Logged in
+        if(Auth::guard('admin')->check()){
+            return redirect('/adminstrator');
+        }
         return $next($request);
-        else
-        // dd(redirect()->intended()->getRequest()->getRequestUri());
-    //pass this 908888location into the authenticator
-        return redirect()->route('adminlogin',['returnUrl'=>redirect()->intended()->getRequest()->getRequestUri()]);
     }
-
 }

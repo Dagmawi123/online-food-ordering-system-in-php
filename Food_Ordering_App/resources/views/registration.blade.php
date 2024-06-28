@@ -1,84 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-
-session_start(); //temp session
-error_reporting(0); // hide undefine index
-// include("connection/connect.php"); // connection
-if(isset($_POST['submit'] )) //if submit btn is pressed
-{
-     if(empty($_POST['firstname']) ||  //fetching and find if its empty
-   	    empty($_POST['lastname'])|| 
-		empty($_POST['email']) ||  
-		empty($_POST['phone'])||
-		empty($_POST['password'])||
-		empty($_POST['cpassword']) ||
-		empty($_POST['cpassword']))
-		{
-			$message = "All fields must be Required!";
-		}
-	else
-	{
-		//cheching username & email if already present
-	$check_username= mysqli_query($db, "SELECT username FROM users where username = '".$_POST['username']."' ");
-	$check_email = mysqli_query($db, "SELECT email FROM users where email = '".$_POST['email']."' ");
-		
-
-	
-	if($_POST['password'] != $_POST['cpassword']){  //matching passwords
-       	$message = "Password not match";
-    }
-	elseif(strlen($_POST['password']) < 6)  //cal password length
-	{
-		$message = "Password Must be >=6";
-	}
-	elseif(strlen($_POST['phone']) < 10)  //cal phone length
-	{
-		$message = "invalid phone number!";
-	}
-
-    elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) // Validate email address
-    {
-       	$message = "Invalid email address please type a valid email!";
-    }
-	elseif(mysqli_num_rows($check_username) > 0)  //check username
-     {
-    	$message = 'username Already exists!';
-     }
-	elseif(mysqli_num_rows($check_email) > 0) //check email
-     {
-    	$message = 'Email Already exists!';
-     }
-	else{
-       
-	 //inserting values into db
-	$mql = "INSERT INTO users(username,f_name,l_name,email,phone,password,address) VALUES('".$_POST['username']."','".$_POST['firstname']."','".$_POST['lastname']."','".$_POST['email']."','".$_POST['phone']."','".md5($_POST['password'])."','".$_POST['address']."')";
-	mysqli_query($db, $mql);
-		$success = "Account Created successfully! <p>You will be redirected in <span id='counter'>5</span> second(s).</p>
-														<script type='text/javascript'>
-														function countdown() {
-															var i = document.getElementById('counter');
-															if (parseInt(i.innerHTML)<=0) {
-																location.href = 'login.php';
-															}
-															i.innerHTML = parseInt(i.innerHTML)-1;
-														}
-														setInterval(function(){ countdown(); },1000);
-														</script>'";
-		
-		
-		
-		
-		 header("refresh:5;url=login.php"); // redireted once inserted success
-    }
-	}
-
-}
-
-
-?>
-
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -87,7 +8,7 @@ if(isset($_POST['submit'] )) //if submit btn is pressed
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="#">
-    <title>Starter Template for Bootstrap</title>
+    <title>Register to FoodPicky</title>
     <!-- Bootstrap core CSS -->
     <link href=" {{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
@@ -100,30 +21,18 @@ if(isset($_POST['submit'] )) //if submit btn is pressed
          <!--header starts-->
          <header id="header" class="header-scroll top-header headrom">
             <!-- .navbar -->
-            <nav class="navbar navbar-dark">
+            <nav class="navbar navbar-dark"> 
                <div class="container">
                   <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#mainNavbarCollapse">&#9776;</button>
-                  <a class="navbar-brand" href="index.php"> <img class="img-rounded" src="images/food-picky-logo.png" alt=""> </a>
+                  <a class="navbar-brand" href="index.php"> <img class="img-rounded" src="{{asset('images/food-picky-logo.png')}}" alt=""> </a>
                   <div class="collapse navbar-toggleable-md  float-lg-right" id="mainNavbarCollapse">
                      <ul class="nav navbar-nav">
 							<li class="nav-item"> <a class="nav-link active" href="index.php">Home <span class="sr-only">(current)</span></a> </li>
                             <li class="nav-item"> <a class="nav-link active" href="restaurants.php">Restaurants <span class="sr-only"></span></a> </li>
                             
-							<?php
-						if(empty($_SESSION["user_id"]))
-							{
-								echo '<li class="nav-item"><a href="login.php" class="nav-link active">login</a> </li>
+						<li class="nav-item"><a href="login.php" class="nav-link active">login</a> </li>
 							  <li class="nav-item"><a href="registration.php" class="nav-link active">signup</a> </li>';
-							}
-						else
-							{
-									
-									
-										echo  '<li class="nav-item"><a href="your_orders.php" class="nav-link active">your orders</a> </li>';
-									echo  '<li class="nav-item"><a href="logout.php" class="nav-link active">logout</a> </li>';
-							}
-
-						?>
+					
 							 
                         </ul>
                   </div>
@@ -262,7 +171,7 @@ if(isset($_POST['submit'] )) //if submit btn is pressed
                      <div class="row text-img-block text-xs-left">
                         <div class="container">
                            <div class="col-xs-12 col-sm-6  right-image text-center">
-                              <figure> <img src="images/app.png" alt="Right Image"> </figure>
+                              <figure> <img src="{{asset('images/app.png')}}" alt="Right Image"> </figure>
                            </div>
                            <div class="col-xs-12 col-sm-6 left-text">
                               <h3>The Best Food Delivery App</h3>
@@ -382,14 +291,14 @@ if(isset($_POST['submit'] )) //if submit btn is pressed
       
     <!-- Bootstrap core JavaScript
     ================================================== -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/tether.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/animsition.min.js"></script>
-    <script src="js/bootstrap-slider.min.js"></script>
-    <script src="js/jquery.isotope.min.js"></script>
-    <script src="js/headroom.js"></script>
-    <script src="js/foodpicky.min.js"></script>
+    <script src="{{asset('js/jquery.min.js')}} "></script>
+    <script src="{{asset('js/tether.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}} "></script>
+    <script src="{{asset('js/animsition.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap-slider.min.js')}}"></script>
+    <script src="{{asset('js/jquery.isotope.min.js')}}"></script>
+    <script src="{{asset('js/headroom.js')}} "></script>
+    <script src="{{asset('js/foodpicky.min.js')}}"></script>
 </body>
 
 </html>

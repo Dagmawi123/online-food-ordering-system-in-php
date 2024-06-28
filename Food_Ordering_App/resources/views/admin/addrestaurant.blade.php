@@ -198,14 +198,14 @@
                                           <div class="col-md-6">
                                               <div class="form-group">
                                                   <label class="control-label">Restaurant Name</label>
-                                                  <input type="text" name="title"  value="{{old('title')}}"   class="form-control" placeholder="John doe">
+                                                  <input type="text" name="title"  value="{{old('title')}}"   class="form-control" placeholder="Intercontinental Hotel">
                                                  </div>
                                           </div>
                                           <!--/span-->
                                           <div class="col-md-6">
                                               <div class="form-group has-danger">
                                                   <label class="control-label">Bussiness E-mail</label>
-                                                  <input type="text" name="email"  value="{{old('email')}}"  class="form-control form-control-danger" placeholder="example@gmail.com">
+                                                  <input type="text" name="email"  value="{{old('email')}}"  class="form-control form-control-danger" placeholder="inter@gmail.com">
                                                   </div>
                                           </div>
                                           <!--/span-->

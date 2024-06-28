@@ -28,7 +28,7 @@ foreach($cart as $item){
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="#">
-    <title>Food Picky</title>
+    <title>Order Your Dish</title>
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link href='{{asset("css/bootstrap.min.css")}}' rel="stylesheet">
@@ -298,7 +298,7 @@ foreach($cart as $item){
                         <div class="row text-img-block text-xs-left">
                             <div class="container">
                                 <div class="col-xs-12 col-sm-6 hidden-xs-down right-image text-center">
-                                    <figure> <img src="images/app.png" alt="Right Image"> </figure>
+                                    <figure> <img src="{{asset('images/app.png')}}" alt="Right Image"> </figure>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 left-text">
                                     <h3>The Best Food Delivery App</h3>
@@ -325,7 +325,7 @@ foreach($cart as $item){
                     <!-- top footer statrs -->
                     <div class="row top-footer">
                         <div class="col-xs-12 col-sm-3 footer-logo-block color-gray">
-                            <a href="#"> <img src="images/food-picky-logo.png" alt="Footer logo"> </a> <span>Order Delivery &amp; Take-Out </span> </div>
+                            <a href="#"> <img src="{{asset('images/food-picky-logo.png')}}" alt="Footer logo"> </a> <span>Order Delivery &amp; Take-Out </span> </div>
                         <div class="col-xs-12 col-sm-2 about color-gray">
                             <h5>About Us</h5>
                             <ul>

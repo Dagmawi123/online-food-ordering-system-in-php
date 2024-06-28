@@ -271,7 +271,7 @@
                         </li>
 						 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
                             <ul aria-expanded="false" class="collapse">
-								<li><a href="/orders">All Orders</a></li>
+								<li><a href="/orders/all">All Orders</a></li>
 								  
                             </ul>
                         </li>
@@ -305,10 +305,10 @@
     <div class="alert alert-danger alert-dismissible fade show">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
         @error('title')
-            <strong>{{ $message }}</strong><br>
+            <strong> Dish Should have proper name like Burger or can't be empty</strong><br>
         @enderror
         @error('slogan')
-            <strong>{{ $message }}</strong><br>
+            <strong>About Field should not be empty</strong><br>
         @enderror
         @error('price')
             <strong>{{ $message }}</strong><br>
@@ -329,6 +329,7 @@
                             <div class="card-body">
                                 <form action='/foods/update/{{$food->id}}' method='post'  enctype="multipart/form-data">
                                 @csrf    
+                                @method('put')
                                 <div class="form-body">
                                                <hr>
                                         <div class="row p-t-20">

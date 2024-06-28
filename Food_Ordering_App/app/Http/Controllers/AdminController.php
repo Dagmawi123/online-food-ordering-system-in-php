@@ -17,7 +17,10 @@ use PHPUnit\Framework\Constraint\Count;
 class AdminController extends Controller
 {
     //
-    function index(){
+    function index(Request $request){
+        // dd($request->input('returnUrl'));
+        session()->put('returnUrl',$request->input('returnUrl'));
+        // dd()
         return view('admin.login');
     }
 
@@ -28,8 +31,13 @@ class AdminController extends Controller
         ]);
         
         if(Auth::guard('admin')->attempt($formData)){
+            //No more needed because authenticated user can not access the admin login
+            // if(Auth::user()){
+            //     Auth::logout();
+            // }
         $request->session()->regenerate();
-        return redirect('/adminstrator');
+        // dd(session()->get('returnUrl','/adminstrator'));
+         return redirect(session()->get('returnUrl','/adminstrator'));
         }
         return back()->withErrors([
             'username' => 'The provided credentials do not match our records.',

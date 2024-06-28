@@ -269,7 +269,7 @@
                         </li>
 						 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
                             <ul aria-expanded="false" class="collapse">
-								<li><a href="/orders">All Orders</a></li>
+								<li><a href="/orders/all">All Orders</a></li>
 								  
                             </ul>
                         </li>
@@ -328,6 +328,7 @@
                             <div class="card-body">
                                 <form action='/categories/update/{{$cat->id}}' method='post' >
                                     @csrf
+                                    @method('put')
                                     <div class="form-body">
                                         
                                         <hr>

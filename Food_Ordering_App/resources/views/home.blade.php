@@ -51,14 +51,14 @@
                     <h1>Order Delivery & Take-Out </h1>
                     <h5 class="font-white space-xs">Find restaurants, specials, and coupons for free</h5>
                     <div class="banner-form">
-                        <form class="form-inline">
-                            <div class="form-group">
-                                <label class="sr-only" for="exampleInputAmount">I would like to eat....</label>
+                            <!-- <form class="form-inline">
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-lg" id="exampleInputAmount" placeholder="I would like to eat...."> </div>
-                            </div>
-                            <button onclick="location.href='restaurants.html'" type="button" class="btn theme-btn btn-lg">Search food</button>
-                        </form>
+                                    <label class="sr-only" for="exampleInputAmount">I would like to eat....</label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-lg" id="exampleInputAmount" placeholder="I would like to eat...."> </div>
+                                </div>
+                                <button onclick="location.href='restaurants.html'" type="button" class="btn theme-btn btn-lg">Search food</button>
+                            </form> -->
                     </div>
                     <div class="steps">
                         <div class="step-item step1">

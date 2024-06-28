@@ -22,6 +22,7 @@ $formData=$request->validate([
 
 if(Auth()->attempt($formData)){
 $request->session()->regenerate();
+// dd(redirect()->intended());
 return redirect()->intended()->with('success','Signed in successfully');
 }
 return back()->withErrors([
@@ -41,7 +42,7 @@ function store(Request $request){
         'fname'=> ['required','min:4'],
         'lname'=> ['required','min:4'],
         'email' => ['required', 'email', Rule::unique('users', 'email')],
-        "phone"=>['required','min:5','max:10'],
+        "phone"=>['required','regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/'],
         'password' => 'required|confirmed|min:4',
         'address' =>'required|min:5'
     ]);
@@ -84,7 +85,7 @@ function update(User $user,Request $request){
         'fname'=> ['required','min:4'],
         'lname'=> ['required','min:4'],
         'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
-        "phone"=>['required','min:5','max:10'],
+"phone"=>['required','regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/']
         ]);
     //   dd($request);
     $user->update($formFields);
@@ -103,7 +104,7 @@ function adminStore(Request $request){
         'fname'=> ['required','min:4'],
         'lname'=> ['required','min:4'],
         'email' => ['required', 'email', Rule::unique('users', 'email')],
-        "phone"=>['required','min:5','max:10'],
+        "phone"=>['required','regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/'],
         'password' => 'required|min:4',
         'address' =>'required|min:5'
     ]);

@@ -16,15 +16,7 @@
     <link href="{{asset('css/adminCss/helper.css')}} " rel="stylesheet">
     <link href="{{asset('css/adminCss/style.css')}}" rel="stylesheet">
     <!-- <link href="{{asset('css/adminCss/spinners.css')}}" rel="stylesheet"> -->
-    <link rel="stylesheet" href="{{asset('css/adminCss/login.css')}}">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-
-  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900'>
-<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Montserrat:400,700'>
-<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
     <!--[if lt IE 9]>
     <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -212,7 +204,7 @@
                                     <h2>{{$NoOfCustomers}}
                                         <!-- no of users -->
                                     </h2>
-                                    <p class="m-b-0">Customer</p>
+                                    <p class="m-b-0">Customers</p>
                                 </div>
                             </div>
                         </div>

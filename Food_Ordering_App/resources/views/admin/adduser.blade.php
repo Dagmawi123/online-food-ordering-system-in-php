@@ -135,7 +135,7 @@
                         </li>
 						 <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
                             <ul aria-expanded="false" class="collapse">
-								<li><a href="/orders">All Orders</a></li>
+								<li><a href="/orders/all">All Orders</a></li>
 								  
                             </ul>
                         </li>
@@ -255,9 +255,7 @@
                                             <div class="col-md-12 ">
                                                 <div class="form-group">
                                                     
-                                                    <textarea name="address" type="text" style="height:100px;" class="form-control">
-                                                    {{old('title')}}
-                                                    </textarea>
+                                                    <textarea name="address" type="text" style="height:100px;" class="form-control">{{old('address')}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
