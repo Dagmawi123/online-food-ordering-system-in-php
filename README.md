@@ -7,7 +7,7 @@ I have made this project as an excercise for using **Laravel** as the web framew
 
 ## Features
 
-Some features this site has include
+Some features this site has included
 - Home page rendering the top 3 popular dishes of the month and list of restaurants whose dishes are available to order.
 - Check out page powered with Stripe Payment Gateway(This is a new feature).
 - Admin Module giving control over the management of available resources of the site.
