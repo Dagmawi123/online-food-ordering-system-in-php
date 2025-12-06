@@ -3,7 +3,7 @@
 A food ordering system making it easy to order dishes from top restaurants in the market. 
 
 ## Introduction
-I have made this project as an excercise for using **Laravel** as the web framework for empowering sites.The frontend assets used in this project are totally forked from [this repo.](https://github.com/navjot789/online-food-ordering-system-in-php)
+I have made this project as an exercise for using **Laravel** as the web framework for empowering sites.The frontend assets used in this project are totally forked from [this repo.](https://github.com/navjot789/online-food-ordering-system-in-php)
 
 ## Features
 
