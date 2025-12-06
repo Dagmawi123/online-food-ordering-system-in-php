@@ -14,7 +14,7 @@ Some features this site has included
 ## Installation
 
 For this project to run successfully you need to have composer and PHP installed on your PC.
-You can get it [composer here](https://getcomposer.org/download/) if you have not installed it before.
+You can get composer [ here](https://getcomposer.org/download/) if you have not installed it before.
 
 Then configure the environment using
 >**cp .env.example .env**
